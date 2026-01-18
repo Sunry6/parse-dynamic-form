@@ -9,8 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UniversalFormRouteImport } from './routes/universal-form'
+import { Route as DynamicFormRouteImport } from './routes/dynamic-form'
 import { Route as IndexRouteImport } from './routes/index'
 
+const UniversalFormRoute = UniversalFormRouteImport.update({
+  id: '/universal-form',
+  path: '/universal-form',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DynamicFormRoute = DynamicFormRouteImport.update({
+  id: '/dynamic-form',
+  path: '/dynamic-form',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +31,50 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dynamic-form': typeof DynamicFormRoute
+  '/universal-form': typeof UniversalFormRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dynamic-form': typeof DynamicFormRoute
+  '/universal-form': typeof UniversalFormRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dynamic-form': typeof DynamicFormRoute
+  '/universal-form': typeof UniversalFormRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/dynamic-form' | '/universal-form'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/dynamic-form' | '/universal-form'
+  id: '__root__' | '/' | '/dynamic-form' | '/universal-form'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DynamicFormRoute: typeof DynamicFormRoute
+  UniversalFormRoute: typeof UniversalFormRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/universal-form': {
+      id: '/universal-form'
+      path: '/universal-form'
+      fullPath: '/universal-form'
+      preLoaderRoute: typeof UniversalFormRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dynamic-form': {
+      id: '/dynamic-form'
+      path: '/dynamic-form'
+      fullPath: '/dynamic-form'
+      preLoaderRoute: typeof DynamicFormRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +87,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DynamicFormRoute: DynamicFormRoute,
+  UniversalFormRoute: UniversalFormRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
