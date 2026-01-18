@@ -1,8 +1,15 @@
 # GitHub Copilot Instructions for React Development
 
+## Additional Guidelines
+
+Please refer to these supplementary documentation files for comprehensive development standards:
+
+- **[React Best Practices](.github/react-best-practices.md)** - Performance optimization, bundle size reduction, and advanced patterns
+- **[Web Interface Guidelines](.github/web-interface-guidelines.md)** - Accessibility, focus states, forms, animation, and typography standards
+
 ## Project Overview
 
-This is a modern React application built with TypeScript, using Rspack as the bundler and following best practices for frontend development.
+This is a dynamic form system for insurance underwriting built with React and TypeScript. It renders forms dynamically from JSON schemas with support for field dependencies (联动), validation, remote options loading, and component library abstraction.
 
 ## Tech Stack
 
