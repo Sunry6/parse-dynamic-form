@@ -46,7 +46,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 9.14.2 # Make sure this matches your package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
